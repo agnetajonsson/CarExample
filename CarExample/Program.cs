@@ -6,10 +6,11 @@ namespace CarExample
     {
         static void Main(string[] args)
         {
-            Car car1 = new Car(regNo: "ABC127") {
+            Car car1 = new Car(regNo: "ABC127", fuelCapacity: 100) {
                 FuelLevel = -10,
                 Mileage = 100
             };
+
 
             Car car2 = new Car("XYZ987");
 

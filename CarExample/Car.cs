@@ -2,39 +2,43 @@
 
 namespace CarExample
 {
-    class Car
+    public class SportsCar : Car
     {
-        public string RegNo { get; set; }
+        public double MaxSpeed {get; set;}
 
+        public SportsCar(string regNo, double fuelCapacity, double maxSpeed) : base(regNo, fuelCapacity)
+        {
+            MaxSpeed = maxSpeed;
+        }
+
+
+        public override void Drive(double distanceKm)
+        {
+            base.Drive(100);
+        }
+    }
+
+    public class Car : FuelVehicle
+    {
         private readonly double fuelConsumtion = 0.1;
 
-        private double fuelLevel;
-        
-        public Car(string regNo)
+        public Car(string regNo, double fuelCapacity) : base(regNo, fuelCapacity)
         {
-            RegNo = regNo;
+            
         }
-
-        public double FuelLevel
-        {
-            get { return fuelLevel; }
-            set {
-                double newLevel = Math.Max(0, value);
-                fuelLevel = Math.Min(newLevel, FuelCapacity);
-            }
-        }
-
-        public double FuelCapacity {
-            get;
-            private set;
-        } = 105;
 
         public double Mileage { get; set; }
+
         public static double GlobalMileage { get; private set; }
 
-
-        public void Drive(double distanceKm)
+        /// <summary>
+        /// Här lägger man in en beskrivning av vas metoden gör
+        /// </summary>
+        /// <param name="distanceKm"></param>
+        public override void  Drive(double distanceKm)
         {
+            base.Drive(distanceKm);
+
             Console.WriteLine(RegNo + " vill köra " + distanceKm + " km." );
             if (distanceKm < 0)
             {
@@ -42,14 +46,14 @@ namespace CarExample
                 Console.WriteLine("Negativt avstånd tolkas som noll");
             }
 
-            double maxDistance = fuelLevel / fuelConsumtion;
+            double maxDistance = FuelLevel / fuelConsumtion;
             if (distanceKm > maxDistance)
             {
                 distanceKm = maxDistance;
                 Console.WriteLine("Bränslet räcker inte så långt.");
             }
 
-            fuelLevel -= distanceKm * fuelConsumtion;
+            FuelLevel -= distanceKm * fuelConsumtion;
             Mileage += distanceKm;
             GlobalMileage += distanceKm;
 
