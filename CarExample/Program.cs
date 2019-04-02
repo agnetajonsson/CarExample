@@ -12,7 +12,7 @@ namespace CarExample
             };
 
 
-            Car car2 = new Car("XYZ987");
+            Car car2 = new Car("XYZ987", 200);
 
             car1.StatusReport();
             car2.StatusReport();
